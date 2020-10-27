@@ -1,4 +1,4 @@
-package Extra;
+package graph.algorithms;
 
 public class UF {
     private int[] qf;

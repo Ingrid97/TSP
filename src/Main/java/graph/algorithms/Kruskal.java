@@ -1,11 +1,13 @@
-package Main;
+package graph.algorithms;
 
-import Extra.*;
+
+
+import graph.structures.Edge;
+import graph.structures.Node;
+import graph.structures.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Kruskal {
 

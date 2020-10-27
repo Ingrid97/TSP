@@ -1,17 +1,13 @@
-package Tests;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Test_Testing {
     public int a;
     public int b;
 
-    @Before
+    @BeforeAll
     public void prep(){
         a = 3;
         b = 6;

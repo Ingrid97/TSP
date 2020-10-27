@@ -1,11 +1,10 @@
-package Main;
-
 import java.util.ArrayList;
 
-import Extra.Graph;
-import Extra.My_File;
-import Extra.Node;
-import Extra.Point;
+import graph.algorithms.Kruskal;
+import graph.algorithms.Prim;
+import helpers.My_File;
+import graph.structures.Node;
+import graph.structures.Point;
 
 
 public class MST {
@@ -77,7 +76,7 @@ public class MST {
     }
 
     /**
-     * Main.Prim
+     * Main.graph.algorithms.Prim
      */
     private static void prim(){
 

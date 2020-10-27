@@ -1,25 +1,21 @@
-package Tests;
-
-import Extra.My_File;
-import Extra.Node;
-import Extra.Point;
-import Extra.UF;
-import Main.Prim;
-import org.junit.Before;
-import org.junit.Test;
+import graph.*;
+import graph.algorithms.Prim;
+import graph.algorithms.UF;
+import graph.structures.Node;
+import graph.structures.Point;
+import helpers.My_File;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static Main.MST.make_nodes;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MST_Testing {
 
     public static ArrayList<Point> prim_points;
 
-    @Before
+    @BeforeAll
     public void read_from_file(){
         //read points from file
         String filename = "points.txt";
@@ -30,7 +26,7 @@ public class MST_Testing {
     public void Connected_graph(){
 
         //make nodes
-        ArrayList<Node> nodes = make_nodes(prim_points);
+        ArrayList<Node> nodes = MST.make_nodes(prim_points);
 
         //prim
         Prim prim = new Prim(nodes);
@@ -39,7 +35,7 @@ public class MST_Testing {
         //prim.print_Graph();
 
         //test
-        UF uf  = prim.getUF();
+        UF uf = prim.getUF();
         for (int i = 0; i < uf.getList().length; i++) {
             assertEquals(uf.getList()[0], uf.getList()[i]);
         }

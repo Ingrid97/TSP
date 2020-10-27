@@ -1,9 +1,9 @@
-package Extra;
+package graph.structures;
 
 /**
  * class for points
  */
-public class Point implements Comparable{
+public class Point implements Comparable {
     private double x;
     private double y;
 
@@ -30,7 +30,6 @@ public class Point implements Comparable{
     }
 
 
-    @Override
     public int compareTo(Object o) {
         Point p = (Point) o;
         if (this.x < p.x) return -1;

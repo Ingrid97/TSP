@@ -1,4 +1,7 @@
-package Extra;
+package graph;
+import graph.structures.Node;
+import graph.structures.Point;
+
 import java.util.ArrayList;
 
 public class Graph {

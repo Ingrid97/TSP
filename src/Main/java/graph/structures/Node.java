@@ -1,4 +1,4 @@
-package Extra;
+package graph.structures;
 import java.util.ArrayList;
 
 public class Node {

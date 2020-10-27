@@ -1,9 +1,9 @@
-package Main;
+package graph.algorithms;
 
 import java.util.ArrayList;
 //Ormen lange
 
-import Extra.*;
+import graph.structures.Node;
 
 public class Prim {
 

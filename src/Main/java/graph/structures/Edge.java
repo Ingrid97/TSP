@@ -1,4 +1,4 @@
-package Extra;
+package graph.structures;
 
 public class Edge implements Comparable{
     private Node n1;

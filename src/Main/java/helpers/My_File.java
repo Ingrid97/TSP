@@ -1,4 +1,6 @@
-package Extra;
+package helpers;
+
+import graph.structures.Point;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

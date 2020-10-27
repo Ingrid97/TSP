@@ -1,7 +1,6 @@
-package Main;
-
-import Extra.Edge;
-import Extra.Node;
+import graph.structures.Edge;
+import graph.structures.Node;
+import graph.algorithms.Kruskal;
 
 import java.util.ArrayList;
 import java.util.Collections;
