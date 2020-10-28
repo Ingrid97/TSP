@@ -4,14 +4,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test_Testing {
-    public int a;
-    public int b;
+    public int a = 3;
+    public int b = 6;
 
-    @BeforeAll
-    public void prep(){
-        a = 3;
-        b = 6;
-    }
 
     @Test
     public void my_test_assert_true(){

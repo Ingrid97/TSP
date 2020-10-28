@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class MST_Testing {
 
     public static ArrayList<Point> prim_points;
 
     @BeforeAll
-    public void read_from_file(){
+    public static void read_from_file(){
         //read points from file
         String filename = "points.txt";
         prim_points = My_File.read_from_file(filename);
@@ -24,6 +25,10 @@ public class MST_Testing {
 
     @Test
     public void Connected_graph(){
+
+        if (prim_points == null) {
+            fail();
+        }
 
         //make nodes
         ArrayList<Node> nodes = MST.make_nodes(prim_points);

@@ -34,6 +34,7 @@ public class My_File{
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+            return null;
         }
         return points;
     }
