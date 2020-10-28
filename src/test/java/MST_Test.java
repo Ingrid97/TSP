@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MST_Testing {
+public class MST_Test {
 
     public static ArrayList<Point> prim_points;
 

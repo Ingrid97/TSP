@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Test_Testing {
+public class Test_Test {
     public int a = 3;
     public int b = 6;
 
