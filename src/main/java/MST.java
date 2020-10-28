@@ -56,7 +56,7 @@ public class MST {
     }
 
     private static Kruskal make_kruskal() {
-        String filename = "target/classes/test_points_2.txt";
+        String filename = MST.class.getResource("test_points_2.txt").getPath();
         ArrayList<Point> kruskal_points = My_File.read_from_file(filename);
 
         //make nodes
@@ -81,7 +81,7 @@ public class MST {
     private static void prim(){
 
         //read points from file
-        String filename = "target/classes/points.txt";
+        String filename = MST.class.getResource("points.txt").getPath();
         ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         //print for test
@@ -123,7 +123,7 @@ public class MST {
     public static void tester(){
 
         //read points from file
-        String filename = "test_points_2.txt";
+        String filename = MST.class.getResource("test_points_2.txt").getPath();;
         ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         //print for test

@@ -14,17 +14,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class MST_Test {
 
-    public static ArrayList<Point> prim_points;
-
-    @BeforeAll
-    public static void read_from_file(){
-        //read points from file
-        String filename = "points.txt";
-        prim_points = My_File.read_from_file(filename);
-    }
-
     @Test
     public void Connected_graph(){
+        String filename = this.getClass().getResource("points.txt").getPath();
+        ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         if (prim_points == null) {
             fail();
