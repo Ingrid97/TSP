@@ -4,6 +4,7 @@ import graph.structures.Point;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class My_File{
@@ -13,6 +14,8 @@ public class My_File{
      * @return points
      */
     public static ArrayList<Point> read_from_file(String file){
+        Locale.setDefault(new Locale("en", "US"));
+
         ArrayList<Point> points = new ArrayList<>();
 
         try {

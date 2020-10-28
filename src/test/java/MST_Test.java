@@ -16,7 +16,7 @@ public class MST_Test {
 
     @Test
     public void Connected_graph(){
-        String filename = this.getClass().getResource("test_points_2.txt").getPath();
+        String filename = this.getClass().getResource("points.txt").getPath();
         ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         if (prim_points == null) {
