@@ -8,7 +8,17 @@ import graph.structures.Point;
 
 
 public class MST {
-    public static void main(String[] args) {
+    private Kruskal kruskal;
+    private Prim prim;
+
+    public MST(){
+        //kruskals algorithm
+        this.kruskal = make_kruskal();
+        this.prim = make_prim();
+
+    }
+
+    public void make() {
 
 
         //testing Algorithm
@@ -23,14 +33,14 @@ public class MST {
         Kruskal kruskal = make_kruskal();
 
         //find odd verticies
-        ArrayList<Node> odds = find_odds(kruskal.getNodes());
+        //ArrayList<Node> odds = find_odds(kruskal.getNodes());
 
         //find perfect matching
-        Perfect_matching pm = new Perfect_matching(odds, kruskal);
+        //Perfect_matching pm = new Perfect_matching(odds, kruskal);
 
     }
 
-    private static ArrayList<Node> find_odds(ArrayList<Node> n){
+    /*private ArrayList<Node> find_odds(ArrayList<Node> n){
         ArrayList<Node> odd_nodes = new ArrayList<>();
         for (int i = 0; i < n.size(); i++) {
             if (n.get(i).get_edges().size()%2 == 1){
@@ -43,9 +53,23 @@ public class MST {
         print_nodes(odd_nodes);
 
         return odd_nodes;
+    }*/
+
+    public ArrayList<Node> odds(){
+        ArrayList<Node> odd_nodes = new ArrayList<>();
+        ArrayList<Node> n = kruskal.getNodes();
+        for (int i = 0; i < n.size(); i++) {
+            if (n.get(i).get_edges().size()%2 == 1){
+                odd_nodes.add(n.get(i));
+            }
+        }
+        System.out.println("odd nodes");
+        print_nodes(odd_nodes);
+
+        return odd_nodes;
     }
 
-    private static void print_nodes(ArrayList<Node> nodes){
+    private void print_nodes(ArrayList<Node> nodes){
         for (Node n : nodes ) {
             System.out.print(n.getNr() + ": ");
             for (Node e : n.get_edges()) {
@@ -55,7 +79,7 @@ public class MST {
         }
     }
 
-    private static Kruskal make_kruskal() {
+    private Kruskal make_kruskal() {
         String filename = MST.class.getResource("test_points_2.txt").getPath();
         ArrayList<Point> kruskal_points = My_File.read_from_file(filename);
 
@@ -75,13 +99,10 @@ public class MST {
         return kruskal;
     }
 
-    /**
-     * Main.graph.algorithms.Prim
-     */
-    private static void prim(){
+    private Prim make_prim(){
 
         //read points from file
-        String filename = MST.class.getResource("points.txt").getPath();
+        String filename = MST.class.getResource("test_points_2.txt").getPath();
         ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         //print for test
@@ -95,23 +116,26 @@ public class MST {
 
         //print result
         prim.print_Graph();
+
+        //return
+        return prim;
     }
 
-    /**
-     * print the points
-     * @param p
-     */
-    public static void print_points(ArrayList<Point> p){
+    public Prim get_prim(){
+        return this.prim;
+    }
+
+    public Kruskal get_kruskal(){
+        return this.kruskal;
+    }
+
+    private void print_points(ArrayList<Point> p){
         for (int i = 0; i < p.size(); i++) {
             System.out.println(p.get(i).getX() + " : " + p.get(i).getY());
         }
     }
 
-    /**
-     * make nodes
-     * @param p
-     * @return list of nodes
-     */
+    //TODO cant be private due to tests?
     public static ArrayList<Node> make_nodes(ArrayList<Point> p){
         ArrayList<Node> n = new ArrayList<>();
         for (int i = 0; i < p.size(); i++) {
@@ -120,7 +144,7 @@ public class MST {
         return n;
     }
 
-    public static void tester(){
+    private void tester(){
 
         //read points from file
         String filename = MST.class.getResource("test_points_2.txt").getPath();;
