@@ -8,13 +8,18 @@ public class Traveling_sailsman_problem {
         //TSP
         System.out.println("Traveling Sailsman problem:");
 
+        String filename:
+        Graph g = new Graph(filename);
+        
         //make an MST
-        MST mst = new MST();
+        MST mst = new MST(g);
 
         //find all odd edges from tsp
         ArrayList<Node> odd_nodes = mst.odds();
+        Graph subgraph = g.getSubgraph(odd_nodes);
 
         //find perfect matching from odd edges
+        Blossom matching = new Blossom(subgraph);
 
         //find a connected multigraph
 
