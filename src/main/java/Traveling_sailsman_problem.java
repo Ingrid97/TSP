@@ -15,7 +15,7 @@ public class Traveling_sailsman_problem {
 
         //the graph whit all the points
         System.out.println("Make the graph");
-        Graph g = new Graph(filename1);
+        Graph g = new Graph(filename2);
 
         //make an MST to the graph
         System.out.println("\nMake the kruskal");

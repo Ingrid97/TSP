@@ -55,7 +55,7 @@ public class Graph {
         //System.out.println(file.getAbsolutePath());
 
         //TODO: fix... just fix
-        String file_name = "/Users/ingridjohansen/Documents/UiB/Master/TSP/target/classes/" + this.filename;
+        String file_name = "./src/main/resources/" + this.filename;
         //System.out.println("got the file!");
         this.points = My_File.read_from_file(file_name);
     }
