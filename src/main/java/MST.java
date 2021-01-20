@@ -10,11 +10,14 @@ import graph.structures.Point;
 public class MST {
     private Kruskal kruskal;
     private Prim prim;
+    private String filename;
 
-    public MST(){
+    public MST(String f){
         //kruskals algorithm
+        this.filename = f;
         this.kruskal = make_kruskal();
         this.prim = make_prim();
+
 
     }
 
@@ -22,21 +25,16 @@ public class MST {
 
 
         //testing Algorithm
-        tester();
+        //TODO
+        //tester();
 
 
-        //Prims Algorithm
+        //Prims Algorithm, not in use
         //prim();
 
 
         //kruskals algorithm
         Kruskal kruskal = make_kruskal();
-
-        //find odd verticies
-        //ArrayList<Node> odds = find_odds(kruskal.getNodes());
-
-        //find perfect matching
-        //Perfect_matching pm = new Perfect_matching(odds, kruskal);
 
     }
 
@@ -80,7 +78,11 @@ public class MST {
     }
 
     private Kruskal make_kruskal() {
-        String filename = MST.class.getResource("test_points_2.txt").getPath();
+        System.out.println("locking for the file");
+        //TODO: find where the error is with points.txt
+        String filename = MST.class.getResource(this.filename).getPath();
+        System.out.println("got the file");
+        System.out.println(filename);
         ArrayList<Point> kruskal_points = My_File.read_from_file(filename);
 
         //make nodes
@@ -103,6 +105,7 @@ public class MST {
 
         //read points from file
         String filename = MST.class.getResource("test_points_2.txt").getPath();
+        System.out.println(filename);
         ArrayList<Point> prim_points = My_File.read_from_file(filename);
 
         //print for test

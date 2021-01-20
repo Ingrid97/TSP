@@ -5,7 +5,9 @@ import graph.algorithms.Kruskal;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Perfect_matching {
+//NOT OPTIMAL AT ALL
+
+public class Perfect_matching_1 {
     private ArrayList<Node> odd_nodes;
     private Kruskal kruskal;
     private ArrayList<Edge> edges;
@@ -13,7 +15,7 @@ public class Perfect_matching {
     private boolean[] connected;
     private boolean[] odds;
 
-    public Perfect_matching(ArrayList<Node> n, Kruskal k){
+    public Perfect_matching_1(ArrayList<Node> n, Kruskal k){
         this.odd_nodes = n;
         this.kruskal = k;
         this.edges = new ArrayList<>();
