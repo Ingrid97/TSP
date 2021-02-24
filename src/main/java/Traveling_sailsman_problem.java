@@ -21,6 +21,7 @@ public class Traveling_sailsman_problem {
         System.out.println("\nMake the kruskal");
         g.make_mst_kruskal();
         //MST mst = new MST(filename1);
+        //g.show_graph_MST();
 
         //find all odd edges from tsp
         System.out.println("\nFind the odd nodes");
@@ -30,6 +31,7 @@ public class Traveling_sailsman_problem {
         //find perfect matching from odd edges
         System.out.println("\nFind a perfect matching");
         g.perfect_matching();
+        //g.show_graph_PM();
 
         //find a connected multigraph
         System.out.println("\nMake connected multigraph");
@@ -38,13 +40,16 @@ public class Traveling_sailsman_problem {
         //make an Eulerian circuit
         System.out.println("\nMake eulerian circuit");
         g.make_eulerian_circuit();
+        g.show_graph_EC();
+
 
         //make an Hamiltonian circuit
         System.out.println("\nMake hamiltonian circuit");
         g.make_Hamiltonian_citcut();
+        g.show_graph_EC();
 
         //print result
-        g.show_graph();
+        //g.show_graph_HC();
 
     }
 }

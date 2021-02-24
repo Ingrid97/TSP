@@ -1,9 +1,7 @@
 package graph;
-import graph.algorithms.Crerry_Blossom_algo;
-import graph.algorithms.Eulerian_circuit;
-import graph.algorithms.Kruskal;
-import graph.algorithms.Perfect_matching;
+import graph.algorithms.*;
 import graph.structures.Edge;
+import graph.structures.Hamiltonian_algorithm_2;
 import graph.structures.Node;
 import graph.structures.Point;
 import helpers.My_File;
@@ -20,8 +18,11 @@ public class Graph {
     private String filename;
     private ArrayList<Node> odd_nodes;
     private Perfect_matching pm;
-    private Crerry_Blossom_algo cbm;
+    private Crerry_Blossom_algo cb_algo;
+    private ArrayList<Edge> cb_pm;
     private ArrayList<Edge> connected_multigraph;
+    private Eulerian_circuit ec;
+    private Hamiltonian_algorithm hm;
 
 
     public Graph(String f){
@@ -54,7 +55,7 @@ public class Graph {
         File file = new File(classLoader.getResource(this.filename).getFile());
         //System.out.println(file.getAbsolutePath());
 
-        //TODO: fix... just fix
+        //TODO: check if this works on other machines (other than mac)
         String file_name = "./src/main/resources/" + this.filename;
         //System.out.println("got the file!");
         this.points = My_File.read_from_file(file_name);
@@ -82,9 +83,40 @@ public class Graph {
     public void perfect_matching(){
         //TODO: make perfect matching
         pm = new Perfect_matching(odd_nodes);
-        //cbm = new Crerry_Blossom_algo();
 
 
+        //use the simlu algorithms (what is maxcardinality???)
+        //maxcardinality = true, not always a perfect matching
+
+        //not up to date yet
+        /*
+        float[][] od = get_edge_list(odd_nodes);
+        cb_algo = new Crerry_Blossom_algo(od, false);
+        int[] pm_holder = cb_algo.maxWeightMatching();
+        print_pm_holder(pm_holder);
+        */
+
+        /*
+        //convert result
+        for (int i = 0; i < pm_holder.length; i++) {
+            Edge e = new Edge(new Node(), new Node());
+            this.cb_pm =
+        }
+
+         */
+
+        Blossoming_algorithm ba = new Blossoming_algorithm(odd_nodes);
+
+    }
+
+    private float[][] get_edge_list(ArrayList<Node> odd_nodes){
+        float[][] od = new float [2][odd_nodes.size()];
+
+        for (int i = 0; i < odd_nodes.size(); i++) {
+            od[0][i] = (float) odd_nodes.get(i).p.getX();
+            od[1][i] = (float) odd_nodes.get(i).p.getY();
+        }
+        return od;
     }
 
     public void make_connected_multigraph(){
@@ -102,7 +134,8 @@ public class Graph {
     public void make_eulerian_circuit(){
         //TODO: make eulerian circuit
 
-        Eulerian_circuit ec = new Eulerian_circuit(nodes, pm);
+        this.ec = new Eulerian_circuit(nodes, pm);
+
         /*
         1. check if graph is eulerian circuit
         2. make a path from node1, through all nodes, and back to node1
@@ -113,7 +146,9 @@ public class Graph {
 
     public void make_Hamiltonian_citcut(){
         //TODO: make hamiltonian circuit
+        //this.hm = new Hamiltonian_algorithm(ec, nodes);
 
+        Hamiltonian_algorithm_2 test = new Hamiltonian_algorithm_2(ec, nodes);
         /*
         1. remove all duplicates of the same node in the path/circuit
         2.
@@ -122,8 +157,15 @@ public class Graph {
     }
 
     /**
-     * Helpers
+     * Extra
      */
+
+    private void print_pm_holder(int[] pm){
+        System.out.println("perfect matching");
+        for (int i = 0; i < pm.length; i++) {
+            System.out.println(i + " : " + pm[i]);
+        }
+    }
 
     private void printedges(ArrayList<Edge> e){
         for (int i = 0; i < e.size(); i++) {
@@ -137,7 +179,41 @@ public class Graph {
         }
     }
 
-    public void show_graph(){
-        Graph_print p = new Graph_print(nodes, edges, pm.getPerfect_matching());
+    public void show_graph_MST(){
+        Graph_print p = new Graph_print(nodes, edges);
+    }
+
+    public void show_graph_PM(){
+        //ArrayList<Edge> edges_print = edges
+        Graph_print p = new Graph_print(nodes, pm.getPerfect_matching());
+    }
+
+    public void show_graph_EC(){
+        ArrayList<Edge> edges_print = new ArrayList<>();
+        for (int i = 0; i < ec.get_path().size()-1; i++) {
+            edges_print.add(new Edge(ec.get_path().get(i), ec.get_path().get(i+1)));
+        }
+        edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-1), ec.get_path().get(0)));
+        Graph_print p = new Graph_print(nodes, edges_print);
+    }
+
+    public void show_graph_EC_testing(){
+        ArrayList<Edge> edges_print = new ArrayList<>();
+        edges_print.add(new Edge(ec.get_path().get(0), ec.get_path().get(1)));
+        edges_print.add(new Edge(ec.get_path().get(1), ec.get_path().get(2)));
+        edges_print.add(new Edge(ec.get_path().get(2), ec.get_path().get(3)));
+
+        edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-3), ec.get_path().get(ec.get_path().size()-2)));
+        edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-2), ec.get_path().get(ec.get_path().size()-1)));
+        edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-1), ec.get_path().get(0)));
+        Graph_print p = new Graph_print(nodes, edges_print);
+    }
+
+    public void show_graph_HC(){
+        ArrayList<Edge> edges_print = new ArrayList<>();
+        for (int i = 1; i < hm.get_eulerian_circuit().get_path().size() ; i++) {
+            edges_print.add(new Edge(hm.get_eulerian_circuit().get_path().get(i-1), hm.get_eulerian_circuit().get_path().get(i)));
+        }
+        Graph_print p = new Graph_print(nodes, edges_print);
     }
 }

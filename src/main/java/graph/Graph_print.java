@@ -11,17 +11,20 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.*;
 
+//TODO: make possible to use from different classes
+//want to print entire algorithm step by step
+
 public class Graph_print extends JFrame {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
-    private ArrayList<Edge> odds;
+    //private ArrayList<Edge> odds;
 
 
 
-    public Graph_print(ArrayList<Node> nodes, ArrayList<Edge> edges, ArrayList<Edge> odds) {
+    public Graph_print(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         this.nodes = nodes;
         this.edges = edges;
-        this.odds = odds;
+        //this.odds = odds;
         test_2();
     }
 
@@ -91,8 +94,8 @@ public class Graph_print extends JFrame {
         g.setColor(Color.CYAN);
         print_edges(g, this.edges);
 
-        g.setColor(Color.GREEN);
-        print_edges(g, this.odds);
+        //g.setColor(Color.GREEN);
+        //print_edges(g, this.odds);
 
 
         g.dispose();

@@ -57,6 +57,18 @@ public class Crerry_Blossom_algo {
         this(getIntEdges(edges), maxcardinality);
     }
 
+
+    /**
+     *
+     * @param edges
+     * [x coordinate][y coordinate]? nei
+     * @param maxcardinality
+     * number of elememts
+     * - number of edges?
+     *
+     *
+     */
+
     public Crerry_Blossom_algo(int[][] edges, boolean maxcardinality) {
         // Vertices are numbered 0 .. (nvertex-1).
         // Non-trivial blossoms are numbered nvertex .. (2*nvertex-1)

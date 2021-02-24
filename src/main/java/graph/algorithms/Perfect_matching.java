@@ -13,6 +13,7 @@ public class Perfect_matching {
         this.perfect_matching = new ArrayList<>();
         this.odd_nodes = odd_nodes;
         make_perfet_matching();
+        System.out.println("odd number:  " + odd_nodes.size());
     }
 
     public void make_perfet_matching(){

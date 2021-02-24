@@ -7,9 +7,11 @@ public class Node {
     private double x;
     private double y;
     private int nr;
+    public boolean[] visited_EC;
+
 
     public Node(Point p, int i){
-        edges = new ArrayList<>();
+        this.edges = new ArrayList<>();
         this.p = p;
         this.x = p.getX();
         this.y = p.getY();
@@ -45,6 +47,15 @@ public class Node {
         }
         return closest;
     }
+
+    public void make_visited_edges(int n){
+        this.visited_EC = new boolean[n];
+    }
+
+    public void add_visited_edge(Node n){
+        this.visited_EC[n.getNr()] = true;
+    }
+
 
     @Override
     public String toString() {
