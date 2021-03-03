@@ -17,6 +17,7 @@ import javax.swing.*;
 public class Graph_print extends JFrame {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
+    int size = 10;
     //private ArrayList<Edge> odds;
 
 
@@ -105,9 +106,10 @@ public class Graph_print extends JFrame {
 
     private void print_points(Graphics g){
         for (int i = 0; i < this.nodes.size(); i++) {
-            int x = (int) this.nodes.get(i).p.getX()*10;
-            int y = (int) this.nodes.get(i).p.getY()*10;
+            int x = (int) this.nodes.get(i).p.getX()*size;
+            int y = (int) this.nodes.get(i).p.getY()*size;
             g.drawOval(x, 780 - y, 4, 4);
+            //g.drawString("." + this.nodes.get(i).getNr() + ".",x, 780 - y);
         }
     }
 
@@ -117,7 +119,7 @@ public class Graph_print extends JFrame {
             Point p1 = e.getN1().p;
             Point p2 = e.getN2().p;
 
-            g.drawLine((int)p1.getX()*10 + 2, 782 - (int)p1.getY()*10, (int)p2.getX()*10 + 2, 782 - (int)p2.getY()*10);
+            g.drawLine((int)p1.getX()*size + 2, 782 - (int)p1.getY()*size, (int)p2.getX()*size + 2, 782 - (int)p2.getY()*size);
         }
     }
 

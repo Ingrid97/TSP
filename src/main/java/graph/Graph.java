@@ -23,6 +23,8 @@ public class Graph {
     private ArrayList<Edge> connected_multigraph;
     private Eulerian_circuit ec;
     private Hamiltonian_algorithm hm;
+    private Hamiltonian_algorithm_2 hm2;
+    private Hamiltonian_algorithm_random hm_r;
 
 
     public Graph(String f){
@@ -148,7 +150,9 @@ public class Graph {
         //TODO: make hamiltonian circuit
         //this.hm = new Hamiltonian_algorithm(ec, nodes);
 
-        Hamiltonian_algorithm_2 test = new Hamiltonian_algorithm_2(ec, nodes);
+        //this.hm2 = new Hamiltonian_algorithm_2(ec, nodes);
+
+        this.hm_r = new Hamiltonian_algorithm_random(ec, nodes);
         /*
         1. remove all duplicates of the same node in the path/circuit
         2.
@@ -210,10 +214,20 @@ public class Graph {
     }
 
     public void show_graph_HC(){
+        for(Edge e : hm_r.HS)
+            System.out.println(e);
+
+        Graph_print p = new Graph_print(nodes, hm_r.HS);
+    }
+
+    /*
+    public void show_graph_HC(){
         ArrayList<Edge> edges_print = new ArrayList<>();
         for (int i = 1; i < hm.get_eulerian_circuit().get_path().size() ; i++) {
             edges_print.add(new Edge(hm.get_eulerian_circuit().get_path().get(i-1), hm.get_eulerian_circuit().get_path().get(i)));
         }
         Graph_print p = new Graph_print(nodes, edges_print);
     }
+
+     */
 }

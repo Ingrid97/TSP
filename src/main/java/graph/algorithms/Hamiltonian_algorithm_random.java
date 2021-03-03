@@ -1,10 +1,12 @@
-package graph.structures;
+//THIS WORKS
+package graph.algorithms;
 
-import graph.algorithms.Eulerian_circuit;
+import graph.structures.Edge;
+import graph.structures.Node;
 
 import java.util.ArrayList;
 
-public class Hamiltonian_algorithm_2 {
+public class Hamiltonian_algorithm_random {
     private Eulerian_circuit eu;
     private ArrayList<Node> nodes;
     private boolean[] visited;
@@ -12,7 +14,7 @@ public class Hamiltonian_algorithm_2 {
     public ArrayList<Edge> HS;
 
 
-    public Hamiltonian_algorithm_2(Eulerian_circuit e, ArrayList<Node> n) {
+    public Hamiltonian_algorithm_random(Eulerian_circuit e, ArrayList<Node> n) {
         this.eu = e;
         this.nodes = n;
         this.visited = new boolean[n.size()];
@@ -41,7 +43,6 @@ public class Hamiltonian_algorithm_2 {
         node_count.get(eu.get_path().get(0).getNr()).add(eu.get_path().get(eu.get_path().size() - 1).getNr());
         node_count.get(eu.get_path().get(0).getNr()).add(eu.get_path().get(1).getNr());
         node_count.get(eu.get_path().get(0).getNr()).add(0);
-
 
         System.out.println("last: " + eu.get_path().get(eu.get_path().size()-1).getNr());
         node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).set(0, node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).get(0) + 1);
@@ -79,69 +80,36 @@ public class Hamiltonian_algorithm_2 {
         for (int i = 0; i < node_count.size(); i++) {
             if (node_count.get(i).get(0) > 1) {
                 System.out.println("removing from (" + i + ")..." );
+                //System.out.println("alt_1_2 (" + alt_1_2 + ") < alt_3_4(" + alt_3_4 + ")");
 
-                double dist_1_x = nodes.get(node_count.get(i).get(1)).p.distance(nodes.get(i).p);
-                double dist_x_2 = nodes.get(i).p.distance(nodes.get(node_count.get(i).get(2)).p);
-                double dist_1_2 = nodes.get(node_count.get(i).get(1)).p.distance(nodes.get(node_count.get(i).get(2)).p);
+                //remove from path
+                //eu.get_path().remove(node_count.get(i).get(6));
 
-                double dist_4_x = nodes.get(node_count.get(i).get(4)).p.distance(nodes.get(i).p);
-                double dist_x_5 = nodes.get(i).p.distance(nodes.get(node_count.get(i).get(5)).p);
-                double dist_4_5 = nodes.get(node_count.get(i).get(4)).p.distance(nodes.get(node_count.get(i).get(5)).p);
+                //remove from nodes
+                //TODO
 
-                double alt_1_2 = dist_1_x + dist_x_2 + dist_4_5;
-                double alt_3_4 = dist_4_x + dist_x_5 + dist_1_2;
+                //change nodes in counter 1
+                int place = 2;
+                if(node_count.get(node_count.get(i).get(1)).get(0) > 1 && node_count.get(node_count.get(i).get(1)).get(2) != i)
+                    place = 5;
+                node_count.get(node_count.get(i).get(1)).set(place, node_count.get(i).get(2));
+                System.out.println("1 place: " + place);
 
-                if(alt_1_2 < alt_3_4){
-                    //System.out.println("alt_1_2 (" + alt_1_2 + ") < alt_3_4(" + alt_3_4 + ")");
+                //change nodes in counter 2
+                place = 1;
+                if(node_count.get(node_count.get(i).get(2)).get(0) > 1 && node_count.get(node_count.get(i).get(2)).get(1) != i)
+                    place = 4;
+                node_count.get(node_count.get(i).get(2)).set(place, node_count.get(i).get(1));
+                System.out.println("2 place: " + place);
 
-                    //remove from path
-                    //eu.get_path().remove(node_count.get(i).get(6));
+                //remove from counter
+                System.out.println(node_count.get(i).get(3));
+                System.out.println(node_count.get(i).get(2));
+                System.out.println(node_count.get(i).get(1));
+                node_count.get(i).remove(3);
+                node_count.get(i).remove(2);
+                node_count.get(i).remove(1);
 
-                    //remove from nodes
-                    //TODO
-
-                    //change nodes in counter 1
-                    int place = 2;
-                    if(node_count.get(node_count.get(i).get(4)).get(0) > 1 && node_count.get(node_count.get(i).get(4)).get(2) != i)
-                        place = 5;
-                    node_count.get(node_count.get(i).get(4)).set(place, node_count.get(i).get(5));
-
-                    //change nodes in counter 2
-                    place = 1;
-                    if(node_count.get(node_count.get(i).get(5)).get(0) > 1 && node_count.get(node_count.get(i).get(5)).get(1) != i)
-                        place = 4;
-                    node_count.get(node_count.get(i).get(5)).set(place, node_count.get(i).get(4));
-
-                    //remove from counter
-                    node_count.get(i).remove(6);
-                    node_count.get(i).remove(5);
-                    node_count.get(i).remove(4);
-                } else {
-                    //System.out.println("alt_1_2 (" + alt_1_2 + ") > alt_3_4(" + alt_3_4 + ")");
-
-                    //remove from path
-                    //eu.get_path().remove(node_count.get(i).get(3));
-
-                    //remove from nodes
-                    //TODO
-
-                    //change nodes in counter 1
-                    int place = 2;
-                    if(node_count.get(node_count.get(i).get(1)).get(0) > 1 && node_count.get(node_count.get(i).get(1)).get(2) != i)
-                        place = 5;
-                    node_count.get(node_count.get(i).get(1)).set(place, node_count.get(i).get(2));
-
-                    //change nodes in counter 2
-                    place = 1;
-                    if(node_count.get(node_count.get(i).get(2)).get(0) > 1  && node_count.get(node_count.get(i).get(2)).get(1) != i)
-                        place = 4;
-                    node_count.get(node_count.get(i).get(2)).set(place, node_count.get(i).get(1));
-
-                    //remove from counter
-                    node_count.get(i).remove(3);
-                    node_count.get(i).remove(2);
-                    node_count.get(i).remove(1);
-                }
 
                 node_count.get(i).set(0, node_count.get(i).get(0)-1);
             }
@@ -160,4 +128,5 @@ public class Hamiltonian_algorithm_2 {
         }
     }
 }
+
 
