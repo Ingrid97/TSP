@@ -22,9 +22,14 @@ public class Graph {
     private ArrayList<Edge> cb_pm;
     private ArrayList<Edge> connected_multigraph;
     private Eulerian_circuit ec;
+
+    //still not quite right
     private Hamiltonian_algorithm hm;
     private Hamiltonian_algorithm_2 hm2;
+    private Hamiltonian_algorithm_2_2 hm2_2;
+    public int hm2_2_len;
     private Hamiltonian_algorithm_random hm_r;
+    public int hm_r_len;
 
 
     public Graph(String f){
@@ -148,15 +153,22 @@ public class Graph {
 
     public void make_Hamiltonian_citcut(){
         //TODO: make hamiltonian circuit
+        //nope
         //this.hm = new Hamiltonian_algorithm(ec, nodes);
 
+        //works but is the easiest, no math
+        this.hm_r = new Hamiltonian_algorithm_random(ec, nodes);
+        this.hm_r_len = calculate_length(hm_r.HS);
+
+
+        //do not work, in progress
+        this.hm2_2 = new Hamiltonian_algorithm_2_2(ec, nodes);
+        this.hm2_2_len = calculate_length(hm2_2.HS);
+
+        //do not work
         //this.hm2 = new Hamiltonian_algorithm_2(ec, nodes);
 
-        this.hm_r = new Hamiltonian_algorithm_random(ec, nodes);
-        /*
-        1. remove all duplicates of the same node in the path/circuit
-        2.
-        */
+
 
     }
 
@@ -169,6 +181,15 @@ public class Graph {
         for (int i = 0; i < pm.length; i++) {
             System.out.println(i + " : " + pm[i]);
         }
+    }
+
+    private int calculate_length(ArrayList<Edge> path){
+        int len = 0;
+        for (int i = 0; i < path.size(); i++) {
+            System.out.println(path.get(i));
+            len += path.get(i).getN1().p.distance(path.get(i).getN2().p);
+        }
+        return len;
     }
 
     private void printedges(ArrayList<Edge> e){
@@ -184,12 +205,12 @@ public class Graph {
     }
 
     public void show_graph_MST(){
-        Graph_print p = new Graph_print(nodes, edges);
+        Graph_print p = new Graph_print(nodes, edges, "", 0);
     }
 
     public void show_graph_PM(){
         //ArrayList<Edge> edges_print = edges
-        Graph_print p = new Graph_print(nodes, pm.getPerfect_matching());
+        Graph_print p = new Graph_print(nodes, pm.getPerfect_matching(), "", 0);
     }
 
     public void show_graph_EC(){
@@ -198,7 +219,9 @@ public class Graph {
             edges_print.add(new Edge(ec.get_path().get(i), ec.get_path().get(i+1)));
         }
         edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-1), ec.get_path().get(0)));
-        Graph_print p = new Graph_print(nodes, edges_print);
+
+        int len_graph = calculate_length(edges_print);
+        Graph_print p = new Graph_print(nodes, edges_print, "graph", len_graph);
     }
 
     public void show_graph_EC_testing(){
@@ -210,14 +233,15 @@ public class Graph {
         edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-3), ec.get_path().get(ec.get_path().size()-2)));
         edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-2), ec.get_path().get(ec.get_path().size()-1)));
         edges_print.add(new Edge(ec.get_path().get(ec.get_path().size()-1), ec.get_path().get(0)));
-        Graph_print p = new Graph_print(nodes, edges_print);
+        Graph_print p = new Graph_print(nodes, edges_print, "", 0);
     }
 
     public void show_graph_HC(){
-        for(Edge e : hm_r.HS)
-            System.out.println(e);
+        //for(Edge e : hm2_2.HS)
+            //System.out.println(e);
 
-        Graph_print p = new Graph_print(nodes, hm_r.HS);
+        Graph_print p2 = new Graph_print(nodes, hm2_2.HS, "math", hm2_2_len);
+        Graph_print p = new Graph_print(nodes, hm_r.HS, "normal", hm_r_len);
     }
 
     /*

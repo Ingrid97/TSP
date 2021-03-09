@@ -18,14 +18,19 @@ public class Graph_print extends JFrame {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     int size = 10;
+    int height_whole = 782;
+    int height_cut = 1300;
+    String name;
+    int len;
     //private ArrayList<Edge> odds;
 
 
 
-    public Graph_print(ArrayList<Node> nodes, ArrayList<Edge> edges) {
+    public Graph_print(ArrayList<Node> nodes, ArrayList<Edge> edges, String name, int len) {
         this.nodes = nodes;
         this.edges = edges;
-        //this.odds = odds;
+        this.name = name;
+        this.len = len;
         test_2();
     }
 
@@ -84,6 +89,7 @@ public class Graph_print extends JFrame {
         frame.setLayout(new BorderLayout());   // <== make panel fill frame
         frame.add(canvas, BorderLayout.CENTER);
         frame.setSize(1000, 1000);
+        frame.setTitle(name + ": " + len);
         frame.setVisible(true);
 
         // do you drawing somewhere else, maybe a different thread
@@ -108,8 +114,9 @@ public class Graph_print extends JFrame {
         for (int i = 0; i < this.nodes.size(); i++) {
             int x = (int) this.nodes.get(i).p.getX()*size;
             int y = (int) this.nodes.get(i).p.getY()*size;
-            g.drawOval(x, 780 - y, 4, 4);
-            //g.drawString("." + this.nodes.get(i).getNr() + ".",x, 780 - y);
+            //g.drawOval(x, 780 - y, 4, 4);
+            //g.drawString("." + this.nodes.get(i).getNr() + ".",x, height_cut - 2 - y);
+
         }
     }
 
@@ -119,7 +126,8 @@ public class Graph_print extends JFrame {
             Point p1 = e.getN1().p;
             Point p2 = e.getN2().p;
 
-            g.drawLine((int)p1.getX()*size + 2, 782 - (int)p1.getY()*size, (int)p2.getX()*size + 2, 782 - (int)p2.getY()*size);
+            g.drawLine((int)p1.getX()*size + 2, height_whole - (int)p1.getY()*size, (int)p2.getX()*size + 2, height_whole - (int)p2.getY()*size);
+            g.drawString("" + i, (int)p1.getX()*size + 2, height_whole - (int)p1.getY()*size);
         }
     }
 
