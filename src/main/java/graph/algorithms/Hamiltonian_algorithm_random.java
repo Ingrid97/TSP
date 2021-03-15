@@ -3,127 +3,85 @@ package graph.algorithms;
 
 import graph.structures.Edge;
 import graph.structures.Node;
+import graph.structures.dup_finder;
 
 import java.util.ArrayList;
 
 public class Hamiltonian_algorithm_random {
     private Eulerian_circuit eu;
     private ArrayList<Node> nodes;
-    private boolean[] visited;
-    private ArrayList<ArrayList<Integer>> node_count;
     public ArrayList<Edge> HS;
+
+    public ArrayList<dup_finder> path;
 
 
     public Hamiltonian_algorithm_random(Eulerian_circuit e, ArrayList<Node> n) {
         this.eu = e;
         this.nodes = n;
-        this.visited = new boolean[n.size()];
-        this.node_count = new ArrayList<>();
         this.HS = new ArrayList<>();
+        this.path = new ArrayList<>();
 
         add_node_count();
         make_hamiltonian();
-        print_counter();
+        print_path();
         make_HS();
     }
 
     private void add_node_count() {
         //this.node_count = new int[nodes.size()];
         for (int i = 0; i < nodes.size(); i++) {
-            ArrayList<Integer> a = new ArrayList<>();
-            node_count.add(a);
-            node_count.get(i).add(0);
+            path.add(new dup_finder(i));
         }
 
-        //print_counter();
-
-        //for the wrap around
-        System.out.println("first: " + eu.get_path().get(0).getNr());
-        node_count.get(eu.get_path().get(0).getNr()).set(0, node_count.get(eu.get_path().get(0).getNr()).get(0) + 1);
-        node_count.get(eu.get_path().get(0).getNr()).add(eu.get_path().get(eu.get_path().size() - 1).getNr());
-        node_count.get(eu.get_path().get(0).getNr()).add(eu.get_path().get(1).getNr());
-        node_count.get(eu.get_path().get(0).getNr()).add(0);
-
-        System.out.println("last: " + eu.get_path().get(eu.get_path().size()-1).getNr());
-        node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).set(0, node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).get(0) + 1);
-        node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).add(eu.get_path().get(eu.get_path().size() - 2).getNr());
-        node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).add(eu.get_path().get(0).getNr());
-        node_count.get(eu.get_path().get(eu.get_path().size()-1).getNr()).add(eu.get_path().size()-1);
+        //for the wrap around (first and last node)
+        add_to_list(0, eu.get_path().size() - 1,1 );
+        add_to_list(eu.get_path().size()-1, eu.get_path().size() - 2,0);
 
 
         //for the rest
         for (int i = 1; i < eu.get_path().size() - 1; i++) {
-            System.out.println("i: " + i);
-            node_count.get(eu.get_path().get(i).getNr()).set(0, node_count.get(eu.get_path().get(i).getNr()).get(0) + 1);
-            node_count.get(eu.get_path().get(i).getNr()).add(eu.get_path().get(i - 1).getNr());
-            node_count.get(eu.get_path().get(i).getNr()).add(eu.get_path().get(i + 1).getNr());
-            node_count.get(eu.get_path().get(i).getNr()).add(i);
+            add_to_list(i, i-1, i+1);
         }
-
-
-        print_counter();
     }
 
-    public void print_counter() {
+    private void add_to_list(int i, int n, int m){
+        int previus = eu.get_path().get(n).getNr();
+        int next = eu.get_path().get(m).getNr();
+        path.get(eu.get_path().get(i).getNr()).add_intersection(previus, next);
+    }
+
+    private void print_path(){
         System.out.println("...");
-        for (int i = 0; i < node_count.size(); i++) {
-            System.out.print(i + ": (" + node_count.get(i).get(0) + ") ");
-            for (int j = 1; j < node_count.get(i).size(); j++) {
-                System.out.print(node_count.get(i).get(j) + ", ");
-            }
-            System.out.println();
+        for (graph.structures.dup_finder df : path) {
+            System.out.println(df);
         }
         System.out.println("...");
     }
 
     private void make_hamiltonian() {
-        for (int i = 0; i < node_count.size(); i++) {
-            if (node_count.get(i).get(0) > 1) {
+
+        for (int j = 0; j < eu.get_path().size(); j++) {
+            int i = eu.get_path().get(j).getNr();
+            if (path.get(i).getCounter() > 1) {
                 System.out.println("removing from (" + i + ")..." );
-                //System.out.println("alt_1_2 (" + alt_1_2 + ") < alt_3_4(" + alt_3_4 + ")");
-
-                //remove from path
-                //eu.get_path().remove(node_count.get(i).get(6));
-
-                //remove from nodes
-                //TODO
-
-                //change nodes in counter 1
-                int place = 2;
-                if(node_count.get(node_count.get(i).get(1)).get(0) > 1 && node_count.get(node_count.get(i).get(1)).get(2) != i)
-                    place = 5;
-                node_count.get(node_count.get(i).get(1)).set(place, node_count.get(i).get(2));
-                System.out.println("1 place: " + place);
-
-                //change nodes in counter 2
-                place = 1;
-                if(node_count.get(node_count.get(i).get(2)).get(0) > 1 && node_count.get(node_count.get(i).get(2)).get(1) != i)
-                    place = 4;
-                node_count.get(node_count.get(i).get(2)).set(place, node_count.get(i).get(1));
-                System.out.println("2 place: " + place);
-
-                //remove from counter
-                System.out.println(node_count.get(i).get(3));
-                System.out.println(node_count.get(i).get(2));
-                System.out.println(node_count.get(i).get(1));
-                node_count.get(i).remove(3);
-                node_count.get(i).remove(2);
-                node_count.get(i).remove(1);
 
 
-                node_count.get(i).set(0, node_count.get(i).get(0)-1);
+                int previus = path.get(i).getFrom(0);
+                int next = path.get(i).getTo(0);
+                path.get(i).remove_intersection(previus, next);
+
+                path.get(previus).change_intersection_to(next, i);
+                path.get(next).change_intersection_from(previus, i);
             }
         }
-
-
     }
 
 
     private void make_HS() {
         //int curr = 0;
-        for (int i = 0; i < node_count.size(); i++) {
+        for (int i = 0; i < path.size(); i++) {
             //System.out.println("curr: " + curr);
-            HS.add(new Edge(nodes.get(i), nodes.get(node_count.get(i).get(2))));
+            HS.add(new Edge(nodes.get(i), nodes.get(path.get(i).getTo(0))));
             //curr = node_count.get(curr).get(2);
         }
     }

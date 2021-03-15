@@ -209,7 +209,6 @@ public class Graph {
     }
 
     public void show_graph_PM(){
-        //ArrayList<Edge> edges_print = edges
         Graph_print p = new Graph_print(nodes, pm.getPerfect_matching(), "", 0);
     }
 
