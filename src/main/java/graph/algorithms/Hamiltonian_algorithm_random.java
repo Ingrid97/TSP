@@ -1,13 +1,10 @@
 //THIS WORKS
 package graph.algorithms;
-
-import graph.structures.Edge;
-import graph.structures.Node;
-import graph.structures.dup_finder;
+import graph.structures.*;
 
 import java.util.ArrayList;
 
-public class Hamiltonian_algorithm_random {
+public class Hamiltonian_algorithm_random implements Hamiltonian{
     private Eulerian_circuit eu;
     private ArrayList<Node> nodes;
     public ArrayList<Edge> HS;
@@ -24,7 +21,7 @@ public class Hamiltonian_algorithm_random {
         add_node_count();
         make_hamiltonian();
         print_path();
-        make_HS();
+        make_printable_HS();
     }
 
     private void add_node_count() {
@@ -58,7 +55,7 @@ public class Hamiltonian_algorithm_random {
         System.out.println("...");
     }
 
-    private void make_hamiltonian() {
+    public void make_hamiltonian() {
 
         for (int j = 0; j < eu.get_path().size(); j++) {
             int i = eu.get_path().get(j).getNr();
@@ -66,8 +63,8 @@ public class Hamiltonian_algorithm_random {
                 System.out.println("removing from (" + i + ")..." );
 
 
-                int previus = path.get(i).getFrom(0);
-                int next = path.get(i).getTo(0);
+                int previus = path.get(i).getFrom(1);
+                int next = path.get(i).getTo(1);
                 path.get(i).remove_intersection(previus, next);
 
                 path.get(previus).change_intersection_to(next, i);
@@ -77,12 +74,9 @@ public class Hamiltonian_algorithm_random {
     }
 
 
-    private void make_HS() {
-        //int curr = 0;
+    public void make_printable_HS() {
         for (int i = 0; i < path.size(); i++) {
-            //System.out.println("curr: " + curr);
             HS.add(new Edge(nodes.get(i), nodes.get(path.get(i).getTo(0))));
-            //curr = node_count.get(curr).get(2);
         }
     }
 }

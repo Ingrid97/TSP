@@ -17,11 +17,14 @@ public class Kruskal {
     private UF qf;
 
     public Kruskal(ArrayList<Node> n){
+
         this.nodes = n;
+        print_Graph();
         this.all_edges = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.qf = new UF(n.size());
         make_graph();
+        print_Graph();
     }
 
     public ArrayList<Node> getNodes(){
@@ -67,15 +70,19 @@ public class Kruskal {
                 node_1.addEdge(node_2);
                 node_2.addEdge(node_1);
                 number_of_edges++;
+
                 System.out.println("edge: " + node_1.getNr() + " - " + node_2.getNr());
                 edges.add(new Edge(node_1, node_2));
 
                 //connect the nodes
                 qf.connect(node_1.getNr(), node_2.getNr());
+
             }
+
 
             //next node
             i++;
+
 
         }
     }
@@ -87,11 +94,7 @@ public class Kruskal {
     }
 
     public void print_Graph(){
-        System.out.println("QF:");
-        System.out.println(qf);
-        System.out.println();
-
-        System.out.println("Nodes:");
+        System.out.println("Nodes:..............");
         for (int i = 0; i < nodes.size(); i++) {
             System.out.print(nodes.get(i).getNr() + ": ");
             for (Node n : nodes.get(i).get_edges()) {

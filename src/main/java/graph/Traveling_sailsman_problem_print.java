@@ -14,7 +14,7 @@ import javax.swing.*;
 //TODO: make possible to use from different classes
 //want to print entire algorithm step by step
 
-public class Graph_print extends JFrame {
+public class Traveling_sailsman_problem_print extends JFrame {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     int size = 10;
@@ -26,7 +26,7 @@ public class Graph_print extends JFrame {
 
 
 
-    public Graph_print(ArrayList<Node> nodes, ArrayList<Edge> edges, String name, int len) {
+    public Traveling_sailsman_problem_print(ArrayList<Node> nodes, ArrayList<Edge> edges, String name, int len) {
         this.nodes = nodes;
         this.edges = edges;
         this.name = name;

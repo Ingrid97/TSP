@@ -7,7 +7,7 @@ import graph.structures.dup_finder;
 
 import java.util.ArrayList;
 
-public class Hamiltonian_algorithm_2_2 {
+public class Hamiltonian_algorithm_2_2 implements Hamiltonian {
     private Eulerian_circuit eu;
     private ArrayList<Node> nodes;
     public ArrayList<Edge> HS;
@@ -23,7 +23,7 @@ public class Hamiltonian_algorithm_2_2 {
         add_node_count();
         make_hamiltonian();
         print_path();
-        make_HS();
+        make_printable_HS();
         print_path();
     }
 
@@ -58,7 +58,7 @@ public class Hamiltonian_algorithm_2_2 {
         System.out.println("...");
     }
 
-    private void make_hamiltonian() {
+    public void make_hamiltonian() {
 
         for (int j = 0; j < eu.get_path().size(); j++) {
             int i = eu.get_path().get(j).getNr();
@@ -108,12 +108,9 @@ public class Hamiltonian_algorithm_2_2 {
         return keep;
     }
 
-    private void make_HS() {
-        //int curr = 0;
+    public void make_printable_HS() {
         for (int i = 0; i < path.size(); i++) {
-            //System.out.println("curr: " + curr);
             HS.add(new Edge(nodes.get(i), nodes.get(path.get(i).getTo(0))));
-            //curr = node_count.get(curr).get(2);
         }
     }
 }
