@@ -2,25 +2,25 @@ package graph.structures;
 
 import java.util.ArrayList;
 
-public class dup_finder {
+public class dupFinder {
     private int counter;
     private ArrayList<Pair> intersections;
     private int node;
 
-    public dup_finder(int n){
+    public dupFinder(int n){
         this.counter = 0;
         this.intersections = new ArrayList<>();
         this.node = n;
     }
 
-    public void add_intersection(int from, int to){
+    public void addIntersection(int from, int to){
         this.counter++;
         intersections.add(new Pair(from, to));
     }
 
-    public void remove_intersection(int from, int to){
+    public void removeIntersection(int from, int to){
         for (int i = 0; i < intersections.size(); i++) {
-            if(this.intersections.get(i).get_from() == from && this.intersections.get(i).get_to() == to){
+            if(this.intersections.get(i).getFrom() == from && this.intersections.get(i).getTo() == to){
                 intersections.remove(i);
                 break;
             }
@@ -28,19 +28,19 @@ public class dup_finder {
         this.counter--;
     }
 
-    public void change_intersection_to(int to, int node){
+    public void changeIntersectionTo(int to, int node){
         for (Pair intersection : intersections) {
-            if (intersection.get_to() == node) {
-                intersection.set_to(to);
+            if (intersection.getTo() == node) {
+                intersection.setTo(to);
                 break;
             }
         }
     }
 
-    public void change_intersection_from(int from, int node){
+    public void changeIntersectionFrom(int from, int node){
         for (Pair intersection : intersections) {
-            if (intersection.get_from() == node) {
-                intersection.set_from(from);
+            if (intersection.getFrom() == node) {
+                intersection.setFrom(from);
                 break;
             }
         }
@@ -50,7 +50,7 @@ public class dup_finder {
     public String toString() {
         String r = "";
         for (Pair intersection : intersections) {
-            r += ": " + intersection.get_from() + " -> " + this.node + " -> " + intersection.get_to();
+            r += ": " + intersection.getFrom() + " -> " + this.node + " -> " + intersection.getTo();
         }
         return r;
     }
@@ -69,11 +69,11 @@ public class dup_finder {
     }
 
     public int getTo(int i){
-        return intersections.get(i).get_to();
+        return intersections.get(i).getTo();
     }
 
     public int getFrom(int i){
-        return intersections.get(i).get_from();
+        return intersections.get(i).getFrom();
     }
 }
 
@@ -86,19 +86,19 @@ class Pair{
         this.to = b;
     }
 
-    int get_from(){
+    int getFrom(){
         return this.from;
     }
 
-    int get_to(){
+    int getTo(){
         return this.to;
     }
 
-    void set_from(int f){
+    void setFrom(int f){
         this.from = f;
     }
 
-    void set_to(int t){
+    void setTo(int t){
         this.to = t;
     }
 }

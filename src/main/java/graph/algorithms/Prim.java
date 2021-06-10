@@ -20,21 +20,12 @@ public class Prim {
      * make the graph
      */
     private void make_graph(){
-        //for all nodes, find closest node
-        //use union find to not two nodes twise
-        //find closest node to current node, and add as edge
-
-        //for all nodes
         for (int i = 0; i < n.size(); i++) {
-            //current node
             Node current = n.get(i);
-            //System.out.println("current: " + i + "/" + current.nr);
 
-            //set default node
             Node closest = n.get(0);
             double closest_dist = Integer.MAX_VALUE;
 
-            //find the closest node
             for (int j = 0; j < n.size(); j++) {
                 if(i != j){
                     if(current.p.distance(n.get(j).p) < closest_dist && !qf.connected(current.getNr(), n.get(j).getNr())){
@@ -43,12 +34,8 @@ public class Prim {
                     }
                 }
             }
-
-            //add closest node/edge to current node
-            //System.out.println("added edge: " + closest.nr + " to node: " + i);
             current.addEdge(closest);
             closest.addEdge(current);
-            //System.out.println("node added!");
 
             //connect
             qf.connect(current.getNr(), closest.getNr());
@@ -76,7 +63,3 @@ public class Prim {
     }
 
 }
-
-
-//can sort all edges from all nodes, but that is n*log(n), and just finding the closest is n
-//point is usless? same info as node?

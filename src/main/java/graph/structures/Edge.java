@@ -25,9 +25,9 @@ public class Edge implements Comparable{
     @Override
     public int compareTo(Object o) {
         Edge p = (Edge) o;
-        double this_dist = this.n1.p.distance(n2.p);
-        double p_dist = p.n1.p.distance(p.n2.p);
-        if (this_dist > p_dist) return 1;
+        double thisDist = this.n1.p.distance(n2.p);
+        double pDist = p.n1.p.distance(p.n2.p);
+        if (thisDist > pDist) return 1;
         else return -1;
     }
 }

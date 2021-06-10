@@ -3,7 +3,6 @@ package graph.structures;
 import java.util.ArrayList;
 
 public class Graph {
-    private ArrayList<Point> points; //bobb bobb
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
 
@@ -13,7 +12,7 @@ public class Graph {
     }
 
     public ArrayList<Edge> makeEdges(ArrayList<Node> nodes){
-        ArrayList<Edge> edge_list = new ArrayList<Edge>();
+        ArrayList<Edge> edge_list = new ArrayList<>();
         for (int i = 0; i < nodes.size(); i++) {
             for (int j = i+1; j < nodes.size(); j++) {
                 Edge e = new Edge(nodes.get(i), nodes.get(j));

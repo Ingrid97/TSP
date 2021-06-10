@@ -1,9 +1,14 @@
 package graph.algorithms;
 
+import graph.structures.Edge;
+import java.util.ArrayList;
+
 interface Hamiltonian {
 
-    void make_hamiltonian(); //the method actually making the HS
+    void makeHamiltonian(); //the method actually making the HS
 
-    void make_printable_HS(); //for making a printable HS
+    void makePrintableHamiltonian(); //for making a printable HS
+
+    ArrayList<Edge> getHamiltonianPath(); //get edges in HS
 
 }

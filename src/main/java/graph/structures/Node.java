@@ -6,7 +6,7 @@ public class Node {
     public Point p;
     private double x;
     private double y;
-    private int nr;
+    private final int nr;
     public boolean[] visited_EC;
 
 
@@ -34,32 +34,26 @@ public class Node {
         return this.nr;
     }
 
-    /**
-     * find the closest node
-     * @return
-     */
-    public Node find_closest_node(){
-        Node closest = edges.get(0);
-        for(Node n : edges){
-            if (n.p.distance(this.p) < closest.p.distance(this.p)){
-                closest = n;
-            }
-        }
-        return closest;
+    public double getX() {
+        return x;
     }
 
-    public void make_visited_edges(int n){
+    public double getY() {
+        return y;
+    }
+
+    public void makeVisitedEdges(int n){
         this.visited_EC = new boolean[n];
     }
 
-    public void add_visited_edge(Node n){
+    public void addVisitedEdge(Node n){
         this.visited_EC[n.getNr()] = true;
     }
 
 
     @Override
     public String toString() {
-        return p.toString();
+        return this.nr + ":" + this.p.toString();
     }
 
 }

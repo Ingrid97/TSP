@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Crerry_Blossom_algo {
+public class BlossomingAlgorithm {
     private static final boolean CHECK_DELTA = false;
     private static final boolean CHECK_OPTIMUM = false;
     private static final boolean DEBUG = false;
@@ -52,7 +52,7 @@ public class Crerry_Blossom_algo {
         return result;
     }
 
-    public Crerry_Blossom_algo(float[][] edges, boolean maxcardinality) {
+    public BlossomingAlgorithm(float[][] edges, boolean maxcardinality) {
         // Helper to allow for float weights
         this(getIntEdges(edges), maxcardinality);
     }
@@ -69,7 +69,7 @@ public class Crerry_Blossom_algo {
      *
      */
 
-    public Crerry_Blossom_algo(int[][] edges, boolean maxcardinality) {
+    public BlossomingAlgorithm(int[][] edges, boolean maxcardinality) {
         // Vertices are numbered 0 .. (nvertex-1).
         // Non-trivial blossoms are numbered nvertex .. (2*nvertex-1)
         //
