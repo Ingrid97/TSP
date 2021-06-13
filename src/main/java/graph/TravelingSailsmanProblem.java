@@ -57,13 +57,6 @@ public class TravelingSailsmanProblem {
         return new PerfectMatching(odd_nodes);
     }
 
-    /**
-     * test
-     */
-    /*public PerfectMatchingControll makePerfectMatchingC(ArrayList<Node> odd_nodes){
-        return new PerfectMatchingControll(odd_nodes);
-    }*/
-
     public EulerianCircuit makeEulerianCircuit(Matching pm){
         return new EulerianCircuit(this.g.getNodes(), pm);
     }
@@ -77,12 +70,6 @@ public class TravelingSailsmanProblem {
     }
 
     public Improvements makeImprovements(HamiltonianAlgorithm h){
-        Improvements i = new Improvements(h.getHamiltonianPath(), g.getNodes());
-        i.makeBestPath();
-        return i;
-    }
-
-    public Improvements makeImprovements(HamiltonianAlgorithmRandom h){
         Improvements i = new Improvements(h.getHamiltonianPath(), g.getNodes());
         i.makeBestPath();
         return i;
@@ -105,21 +92,30 @@ public class TravelingSailsmanProblem {
         TravelingSailsmanProblemPrint p2 = new TravelingSailsmanProblemPrint(this.g.getNodes(), path, name, len);
     }
 
-    public void printResult(Improvements hImproved, HamiltonianAlgorithmRandom hBlossom, HamiltonianAlgorithmRandom h){
+    public void printResult(Improvements hImproved,Improvements BlossomImproved, HamiltonianAlgorithmRandom hBlossom, HamiltonianAlgorithmRandom h){
         int lengthBlossom = calculateLength(hBlossom.getHamiltonian());
-        int lengthImproved = calculateLength(hImproved.getBestPath());
         int length = calculateLength(h.getHamiltonian());
+        int lengthImproved = calculateLength(hImproved.getBestPath());
+        int lengthImprovedBlossom = calculateLength(BlossomImproved.getBestPath());
+
+        double procentImprovementU = (double)lengthImproved / (double)lengthBlossom;
+        double procentImprovementB = (double)lengthImprovedBlossom / (double)lengthBlossom;
 
         System.out.println("TSP results:\n");
 
         System.out.println("TSP with Blossom matching:");
-        System.out.println("length:" + lengthBlossom);
+        System.out.println("Length: " + lengthBlossom + "\n");
 
         System.out.println("TSP with Random matching:");
-        System.out.println("length:" + length);
+        System.out.println("Length: " + length + "\n");
 
         System.out.println("TSP with Improvements:");
-        System.out.println("length:" + lengthImproved);
+        System.out.println("Length: " + lengthImproved);
+        System.out.println("Improvements procent: " + (1.0-procentImprovementU)*100 + "\n");
+
+        System.out.println("TSP Blossom with Improvements:");
+        System.out.println("Length: " + lengthImprovedBlossom);
+        System.out.println("Improvements procent: " + (1.0-procentImprovementB)*100 + "\n");
 
     }
 }

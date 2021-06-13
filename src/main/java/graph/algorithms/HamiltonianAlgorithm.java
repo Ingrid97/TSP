@@ -15,7 +15,6 @@ public class HamiltonianAlgorithm implements Hamiltonian {
     private ArrayList<dupFinder> path;
 
 
-
     public HamiltonianAlgorithm(EulerianCircuit e, ArrayList<Node> n) {
         this.eulerian = e;
         this.nodes = n;
@@ -45,6 +44,11 @@ public class HamiltonianAlgorithm implements Hamiltonian {
         return this.hamiltonianPath;
     }
 
+    /**
+     * @param i current position
+     * @param n previus position
+     * @param m next position
+     */
     private void addToList(int i, int n, int m){
         int previus = eulerian.getPath().get(n).getNr();
         int next = eulerian.getPath().get(m).getNr();
@@ -59,7 +63,7 @@ public class HamiltonianAlgorithm implements Hamiltonian {
                 
                 int bestToKeep = findBestNode(i);
                 int count = path.get(i).getCounter();
-                for (int k = 0; k < count; k++) {
+                for (int k = count-1; k >= 0 ; k--) {
                     if(k != bestToKeep){
                         int previus = path.get(i).getFrom(k);
                         int next = path.get(i).getTo(k);

@@ -28,9 +28,6 @@ public class EulerianCircuit {
         }
     }
 
-    /**
-       recursive
-     */
     private void findPath(){
         this.workingStack = new Stack<>();
         this.finalePath = new ArrayList<>();

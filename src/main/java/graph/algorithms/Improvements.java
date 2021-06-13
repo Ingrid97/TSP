@@ -20,12 +20,15 @@ public class Improvements {
     }
 
     public void makeBestPath(){
+
         RemovingCrossingEdges remove = new RemovingCrossingEdges(this.path, this.nodes);
         remove.remove();
 
         ChangePlacementOfNode change = new ChangePlacementOfNode(remove.getPath(), this.nodes);
         change.changePath();
 
+
+        //continue til there are no more crossing edges made
         while(change.containsCrossingEdges()){
             remove = new RemovingCrossingEdges(change.path, this.nodes);
             remove.remove();

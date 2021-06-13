@@ -26,7 +26,7 @@ public class PerfectMatchingBlossom implements Matching {
 
     public void makePerfectMatching(){
         convertData();
-        cb = new BlossomingAlgorithm(edges, false);
+        cb = new BlossomingAlgorithm(edges, true);
         pm = cb.maxWeightMatching();
 
         convertBack();
@@ -37,9 +37,10 @@ public class PerfectMatchingBlossom implements Matching {
         for (int i = 0; i < odd_nodes.size(); i++) {
             for (int j = i; j < odd_nodes.size(); j++) {
                 double len = odd_nodes.get(i).p.distance(odd_nodes.get(j).p);
-                int int_len = (int)(len * 100);
+                int int_len = (int)(len * -10);
                 int[] e = {odd_nodes.get(i).getNr(), odd_nodes.get(j).getNr(), int_len};
-                edges[counter++] = e;
+                edges[counter] = e;
+                counter++;
             }
         }
     }
@@ -63,17 +64,6 @@ public class PerfectMatchingBlossom implements Matching {
             }
         }
         return count;
-    }
-
-    private void printPm(int[] pm){
-        for (int i = 0; i < pm.length; i++) {
-        }
-    }
-
-    private void printPM(){
-        for (int i = 0; i < perfectMatching.size(); i++) {
-            System.out.println(perfectMatching.get(i));
-        }
     }
 
     public ArrayList<Edge> getPerfectMatching() {

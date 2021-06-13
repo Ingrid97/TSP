@@ -34,14 +34,17 @@ public class Main {
         System.out.println("\nMaking a hamiltonian circuit...\n\n");
         HamiltonianAlgorithmRandom hamiltonan = TSP.makeHamiltonianCitcut(eulerianCircut);
         HamiltonianAlgorithmRandom hamiltonanBlossom = TSP.makeHamiltonianCitcut(eulerianCircutBlossom);
+
         HamiltonianAlgorithm hamiltonianImproved = TSP.makeHamiltonianCitcutMath(eulerianCircut);
+        HamiltonianAlgorithm hamiltonianImprovedBlossom = TSP.makeHamiltonianCitcutMath(eulerianCircutBlossom);
 
 
-        //make improvements to the Hamiltonian algorithm
+        System.out.println("\nMaking Improvements to the walk...\n\n");
         Improvements improvements = TSP.makeImprovements(hamiltonianImproved);
-        Improvements improvementsBlossom = TSP.makeImprovements(hamiltonanBlossom);
+        //Improvements improvementsBlossom = TSP.makeImprovements(hamiltonanBlossom);
+        Improvements improvementsBlossom = TSP.makeImprovements(hamiltonianImprovedBlossom);
 
-        TSP.printResult(improvements, hamiltonanBlossom, hamiltonan);
+        TSP.printResult(improvements, improvementsBlossom, hamiltonanBlossom, hamiltonan);
 
 
 
@@ -52,12 +55,12 @@ public class Main {
         TSP.showGraph(perfectMatchingBlossom.getPerfectMatching(), "blossom");
 
         //hamiltonian
-        TSP.showGraph(hamiltonan.getHamiltonian(), "Hamiltonain");
+        //TSP.showGraph(hamiltonan.getHamiltonian(), "Hamiltonain");
         TSP.showGraph(hamiltonanBlossom.getHamiltonian(), "Hamiltonain Blossom");
 
         //Improvements
         TSP.showGraph(improvements.getBestPath(), "Hamiltonian improved");
-        TSP.showGraph(improvementsBlossom.getBestPath(), "Hamiltonian improved");
+        TSP.showGraph(improvementsBlossom.getBestPath(), "Hamiltonian Blossom improved");
 
     }
 }
